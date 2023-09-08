@@ -1,0 +1,51 @@
+@import "~/assets/variables";
+
+$button-background-principal: $indigo700;
+$button-color-principal: $black50;
+$button-background-hover: $indigo400;
+$button-background-pressed: $indigo800;
+$button-background-focused: $indigo800;
+$button-background-disabled: $black50;
+$button-color-disabled: $black300;
+$button-secondary-color-hover: $black30;
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  padding: $space-m $space-xxg;
+  border-radius: $border_radius_small;
+
+  color: $button-color-principal;
+
+  &.primary {
+    background-color: $button-background-principal;
+  }
+
+  &.primary:hover {
+    background-color: $button-background-hover;
+    color: $button-secondary-color-hover;
+  }
+
+  &.primary:focus {
+    background-color: $button-background-pressed;
+  }
+
+  &.primary:active {
+    background-color: $button-background-focused;
+  }
+
+  &.primary:disabled,
+  &:disabled {
+    cursor: default;
+    color: $button-color-disabled;
+    background-color: $button-background-disabled;
+  }
+
+  &.noPadding {
+    padding: 0;
+  }
+}

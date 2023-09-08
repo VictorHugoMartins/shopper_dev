@@ -1,0 +1,24 @@
+@import "~/assets/mixins";
+@import "~/assets/variables";
+
+
+.pageContent {
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+
+  margin-left: 0;
+  width: 100vw;
+
+  .navBarContent {
+    background-color: $indigo400;
+  }
+
+  .content {
+    padding: $space-xg;
+
+    @include mobile {
+      padding: $space-m;
+    }
+  }
+}

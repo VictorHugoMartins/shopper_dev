@@ -1,0 +1,14 @@
+@import "~/assets/variables";
+@import "~/components/Button/button.module.scss";
+
+.allFileInput {
+  .fileInput {
+    @extend .button;
+
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@import "~/assets/variables";
+
+.flexbox {
+  display: flex;
+
+  @each $spacingName in $spacingNames {
+    $value: getValue($spacingNames, $spacingValues, $spacingName);
+
+    &.#{$spacingName}Spacing {
+      column-gap: $value;
+      row-gap: $value;
+    }
+
+    @each $spacingType in $spacingTypes {
+      &.#{$spacingName}#{$spacingType}Margin {
+        #{'margin-#{$spacingType}'}: $value;
+
+      }
+    }
+  }
+
+}

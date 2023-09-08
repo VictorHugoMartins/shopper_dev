@@ -1,0 +1,24 @@
+@import "~/assets/variables";
+@import "~/assets/colors";
+
+.siteNavbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: unset;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+
+  min-height: 72px;
+  padding: $space-p $space-xg;
+
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+
+  h2 {
+    color: $black30;
+  }
+}

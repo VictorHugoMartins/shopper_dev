@@ -1,0 +1,19 @@
+@import "~/assets/colors";
+
+// border radius
+$border_radius_small: 8px;
+
+// ESPAÇAMENTO
+$space-zero: 0px;
+$space-pp: 4px;
+$space-p: 8px;
+$space-m: 16px;
+$space-g: 24px;
+$space-xg: 32px;
+$space-xxg: 40px;
+
+$spacingNames: "zero", "pp", "p", "m", "g", "xg", "xxg";
+$spacingValues: $space-zero, $space-pp, $space-p, $space-m, $space-g, $space-xg, $space-xxg;
+$spacingTypes: "top", "bottom", "right", "left";
+
+$primary-color: $indigo900;

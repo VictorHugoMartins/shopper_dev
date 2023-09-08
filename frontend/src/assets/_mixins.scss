@@ -1,0 +1,30 @@
+@import "~/assets/variables";
+
+$width-extrasmall: 420px;
+
+@mixin mobile($width-range: "max") {
+  @if $width-range =="max" {
+    @media screen and (max-width: $width-extrasmall) {
+      @content;
+    }
+  }
+
+  @else {
+    @media screen and (min-width: $width-extrasmall) {
+      @content;
+    }
+  }
+}
+
+@function getValue($props, $values, $search) {
+  $n1: index($props, $search);
+  $n2: index($values, $search);
+
+  @if($n1) {
+    @return nth($values, $n1);
+  }
+
+  @else {
+    @return nth($props, $n2);
+  }
+}
