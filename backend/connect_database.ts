@@ -1,6 +1,6 @@
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_USER } from "./config/enviroment_variables";
 
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
   host: DB_HOST,

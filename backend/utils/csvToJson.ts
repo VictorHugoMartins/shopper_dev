@@ -1,10 +1,16 @@
 import { objType } from "../types/objType";
 
-export function csvToJson(csv: string): {}[] {
+export function csvToJson(csv: string): {}[] | null {
   let result = [] as Array<objType>;
 
   let lines = csv.split("\n");
   let headers = lines[0].split(",");
+
+  console.log("os headers: ", headers);
+
+  if (!headers.includes('product_code') && !headers.includes('new_price\r') && headers.length !== 2) {
+    return null
+  }
 
   for (let i = 1; i < lines.length; i++) {
     let obj = {} as any;
