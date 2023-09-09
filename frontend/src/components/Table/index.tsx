@@ -4,17 +4,13 @@ import styles from './table.module.scss';
 import Grid from "@material-ui/core/Grid";
 import { Box } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
+import { DataTableRenderType } from "~/types/DataTableRenderType";
 
-interface TableProps {
-  columns: any;
-  rows: any;
-  buttons?: any;
-}
+interface TableProps extends DataTableRenderType { }
 
 const Table: React.FC<TableProps> = ({
   columns,
-  rows,
-  buttons
+  rows
 }) => {
   const itemsPerPage = 20;
   const [page, setPage] = useState(1);
@@ -36,9 +32,6 @@ const Table: React.FC<TableProps> = ({
 
           <div className={`${styles.row} ${styles.header} ${styles.blue}`}>
             {columns?.map((item) => (<div className={styles.cell}>{item.label}</div>))}
-
-            {buttons && <div className={styles.cell}></div>}
-
           </div>
 
           {rows?.slice((page - 1) * itemsPerPage, page * itemsPerPage)

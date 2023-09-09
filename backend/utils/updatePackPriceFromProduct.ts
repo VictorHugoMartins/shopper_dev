@@ -1,8 +1,8 @@
 import connection from "../connect_database";
-import { objType } from "../types/objType";
+import { ProductType } from "../types/ProductType";
 
 // Atualiza os preços de pacotes após alterar o preço de produtos individuais via csv
-async function updatePackPriceFromProduct(item: objType) {
+async function updatePackPriceFromProduct(item: ProductType) {
   try {
     const result = await new Promise<any>((resolve, reject) => {
       connection.query(`SELECT DISTINCT pack_id, sales_price, qty, product_id

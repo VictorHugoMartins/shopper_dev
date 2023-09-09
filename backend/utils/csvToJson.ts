@@ -1,7 +1,7 @@
-import { objType } from "../types/objType";
+import { ProductType } from "../types/ProductType";
 
 export function csvToJson(csv: string): {}[] | null {
-  let result = [] as Array<objType>;
+  let result = [] as Array<ProductType>;
 
   let lines = csv.split("\n");
   let headers = lines[0].split(",");

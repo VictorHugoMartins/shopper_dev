@@ -1,4 +1,3 @@
-import { objType } from "../types/objType";
 import { csvToJson } from "./csvToJson";
 
 export function convertCSVBase64ToDict(base64file: string): any {

@@ -1,5 +1,5 @@
 import connection from "../connect_database";
-import { objType } from "../types/objType";
+import { ProductType } from "../types/ProductType";
 import { convertCSVBase64ToDict } from "./convertCSVBase64ToDict";
 import tableColumns from "./tableColumns";
 
@@ -12,7 +12,7 @@ async function validateList(data: any) {
     isValid = false;
   }
 
-  const newList = await Promise.all(list.map(async function (item: objType) {
+  const newList = await Promise.all(list.map(async function (item: ProductType) {
     item.message = "";
     if (!item.product_code) {
       item.message = item.message + "Código inexistente!"
