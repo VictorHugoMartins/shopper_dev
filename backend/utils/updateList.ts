@@ -9,7 +9,7 @@ async function updateList(data: any) {
   await Promise.all(list.map(async function (item: ProductType) {
     connection.query("UPDATE products SET sales_price = ? WHERE code = ?",
       [Number(item.new_price), Number(item.product_code)],
-      function (err: any, result: any) {
+      function (err: Error) {
         if (err) throw err;
       }
     );

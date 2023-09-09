@@ -13,7 +13,7 @@ async function updateProductPriceFromPack(item: ProductType) {
       and products.code = ?
       LIMIT 1`,
         Number(item.product_code),
-        (err: any, rows: any) => {
+        (err: Error, rows: {}) => {
           if (err) {
             reject(err);
           } else {
@@ -31,7 +31,7 @@ async function updateProductPriceFromPack(item: ProductType) {
       SET sales_price = sales_price / ?
       WHERE code = ?`,
           [Number(result[0].qty), result[0].product_id],
-          (err: any, rows: any) => {
+          (err: Error, rows: {}) => {
             if (err) {
               reject(err);
             } else {

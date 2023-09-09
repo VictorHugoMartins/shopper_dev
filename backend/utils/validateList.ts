@@ -25,7 +25,7 @@ async function validateList(data: any) {
         connection.query(
           "SELECT code, name, cost_price, sales_price from products where code = ? limit 1",
           item.product_code,
-          (err: any, rows: any) => {
+          (err: Error, rows: {}) => {
             if (err) {
               reject(err);
             } else {

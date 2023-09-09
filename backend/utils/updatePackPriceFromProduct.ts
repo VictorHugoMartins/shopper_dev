@@ -10,7 +10,7 @@ async function updatePackPriceFromProduct(item: ProductType) {
        INNER JOIN products ON packs.pack_id = products.code
        AND products.code = ?`,
         Number(item.product_code),
-        (err: any, rows: any) => {
+        (err: Error, rows: {}) => {
           if (err) {
             reject(err);
           } else {
@@ -22,13 +22,13 @@ async function updatePackPriceFromProduct(item: ProductType) {
 
     if (typeof result !== "undefined" && typeof result[0] !== "undefined") {
       console.log(result[0])
-      const update = await new Promise<any>((resolve, reject) => {
+      const update = await new Promise<{}>((resolve, reject) => {
         connection.query(`UPDATE products SET sales_price = (
            SELECT sales_price - (qty * (SELECT sales_price FROM products WHERE code = ? LIMIT 1)) + (qty * ?)
            FROM subquery
          ) WHERE code = ?`,
           [Number(result[0].product_id), Number(item.new_price), Number(item.product_code)],
-          (err: any, rows: any) => {
+          (err: Error, rows: {}) => {
             if (err) {
               reject(err);
             } else {

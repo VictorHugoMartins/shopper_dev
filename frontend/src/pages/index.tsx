@@ -47,7 +47,7 @@ function HomePage() {
     return resp;
   };
 
-  const updateFile = (data: any) => {
+  const updateFile = (data: {}) => {
     const apiUrl = API.UPDATE();
     const requestData = { data };
 
