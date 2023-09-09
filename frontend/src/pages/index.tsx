@@ -12,6 +12,8 @@ import { DataTableRenderType } from "~/types/DataTableRenderType";
 import Toast from "~/utils/Toast/Toast";
 import AllFileInput from "~/components/AllFileInput";
 
+import styles from './index.module.scss';
+
 function HomePage() {
   const [_tableData, setTableData] = useState<DataTableRenderType>();
   const [_isValid, setIsValid] = useState<boolean>(false);
@@ -33,7 +35,6 @@ function HomePage() {
     const resp = fetch(apiUrl, requestOptions)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         if (data.success) {
           setTableData(data.object.list);
           setIsValid(data.object.isValid);
@@ -63,7 +64,9 @@ function HomePage() {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          Toast.success(data.message)
+          Toast.success(data.message);
+          setIsValid(false);
+          setTableData(null);
         } else {
           Toast.error(data.message)
         }
@@ -76,12 +79,17 @@ function HomePage() {
   return (
     <PageStructure title={"Página Inicial"}>
       <Flexbox justify="flex-end" width={"100%"} >
-        <div style={{ maxWidth: "350px", padding: "8px" }}>
-          <AllFileInput onChange={(f) => { validateFile(f.file) }} />
-        </div>
-        <div style={{ maxWidth: "250px", padding: "8px" }}>
-          <Button color="primary" text={"Atualizar"} disabled={!_isValid} onClick={() => updateFile(_tableData.rows)} />
-        </div>
+        <AllFileInput
+          onChange={(f) => { validateFile(f.file) }}
+          remove={_tableData === null}
+        />
+        <Button
+          color="primary"
+          text={"Atualizar"}
+          disabled={!_isValid}
+          onClick={() => updateFile(_tableData.rows)}
+          className={styles.updateButton}
+        />
       </Flexbox>
       {_tableData && <Table
         columns={_tableData.columns}

@@ -8,12 +8,12 @@ import ClassJoin from "~/utils/ClassJoin/ClassJoin";
 
 const Button: React.FC<ButtonProps> = ({
   color,
-  noPadding,
+  className,
   text,
   disabled,
   onClick,
 }) => {
-  let classList = [styles.button, styles[color], noPadding && styles.noPadding];
+  let classList = [styles.button, styles[color], className && className];
 
   return (
     <button

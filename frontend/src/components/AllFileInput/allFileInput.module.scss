@@ -2,6 +2,9 @@
 @import "~/components/Button/button.module.scss";
 
 .allFileInput {
+  max-width: 350px;
+  padding: $space-p;
+
   .fileInput {
     @extend .button;
 

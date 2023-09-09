@@ -15,6 +15,7 @@ import ClassJoin from "~/utils/ClassJoin/ClassJoin";
 const AllFileInput: React.FC<FileInputProps> = ({
   onChange,
   value,
+  remove
 }) => {
   const [allFile, setAllFile] = useState<File>(null);
   const [inputValue, setInputValue] = useState<FileObjectType>({
@@ -26,6 +27,12 @@ const AllFileInput: React.FC<FileInputProps> = ({
   useEffect(() => {
     if (value) setInputValue(value);
   }, [value]);
+
+  useEffect(() => {
+    if (remove === true) {
+      setInputValue(null);
+    }
+  }, [remove])
 
   function _onChange(event: React.ChangeEvent<HTMLInputElement>) {
     let file = event.target.files[0];

@@ -1,6 +1,6 @@
 export interface ButtonProps {
   color?: "primary" | "secondary" | "success" | "danger" | "warning";
-  noPadding?: boolean;
+  className?: string;
   disabled?: boolean;
   text?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
