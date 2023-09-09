@@ -23,7 +23,7 @@ $ yarn
 # Execute o front-end da aplicação
 $ yarn dev
 
-Por padrão, o servidor front-end iniciará em http://localhost:3000 e o back-end iniciará em http://localhost:5000. As variáveis de configuração de banco de dados e ambiente de execução podem ser alteradas nos arquivos backend/config/environment_variables.ts (conexão com banco de dados, dados do ambiente de execução) e frontend/config/api_routes.ts (dados do ambiente de execução). Tal separação foi pensada devida a separação comum entre os projetos de desenvolvimento de front e back-end.
 ```
+Por padrão, o servidor front-end iniciará em http://localhost:3000 e o back-end iniciará em http://localhost:5000. As variáveis de configuração de banco de dados e ambiente de execução podem ser alteradas nos arquivos backend/config/environment_variables.ts (conexão com banco de dados, dados do ambiente de execução) e frontend/config/api_routes.ts (dados do ambiente de execução). Tal separação foi pensada devida a separação comum entre os projetos de desenvolvimento de front e back-end.
 
 Desenvolvido por Victor Hugo Martins 🦸
