@@ -1,5 +1,6 @@
 import connection from "../connect_database";
 import { ProductType } from "../types/ProductType";
+import isPack from "./isPack";
 import updatePackPriceFromProduct from "./updatePackPriceFromProduct";
 import updateProductPriceFromPack from "./updateProductPriceFromPack";
 
@@ -14,8 +15,9 @@ async function updateList(data: any) {
       }
     );
 
-    updateProductPriceFromPack(item);
-    updatePackPriceFromProduct(item);
+    let isProductAPack = await isPack(item);
+    if (isProductAPack) updateProductPriceFromPack(item);
+    else updatePackPriceFromProduct(item);
 
   }))
 }

@@ -25,7 +25,6 @@ async function updateProductPriceFromPack(item: ProductType) {
     });
 
     if (typeof result !== "undefined" && typeof result[0] !== "undefined") {
-      console.log(result[0])
       await new Promise<any>((resolve, reject) => {
         connection.query(`UPDATE products
       SET sales_price = sales_price / ?
