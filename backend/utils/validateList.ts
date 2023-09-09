@@ -15,13 +15,14 @@ async function validateList(data: any) {
 
   const newList = await Promise.all(list.map(async function (item: ProductType) {
     item.message = "";
-    if (!item.product_code) {
-      item.message = item.message + "Código inexistente!"
-    } else {
-      if (!item.new_price || (Number.isNaN(parseFloat(item.new_price.toString())))) {
-        item.message = item.message + "Novo preço inválido!"
-      }
 
+    if (!item.new_price || (Number.isNaN(parseFloat(item.new_price.toString())))) {
+      item.message = item.message + "Novo preço inválido!"
+    }
+
+    if (!item.product_code) {
+      item.message = "Código inexistente!" + item.message
+    } else {
       const results = await new Promise<any>((resolve, reject) => {
         connection.query(
           "SELECT code, name, cost_price, sales_price from products where code = ? limit 1",
@@ -36,12 +37,12 @@ async function validateList(data: any) {
         );
       });
 
-      if (!results) {
-        item.message = item.message + "Código inexistente!";
+      if (!results || !results[0]) {
+        item.message = "Código inexistente!" + item.message;
       } else {
         let result = { ...results[0], cost_price: parseFloat(results[0].cost_price), sales_price: parseFloat(results[0].sales_price) }
         item = { ...item, name: result.name, sales_price: result.sales_price };
-        
+
         if (item.new_price < result.cost_price) {
           item.message = "Não atende a restrição do time financeiro!"
         }
