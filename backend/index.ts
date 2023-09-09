@@ -13,19 +13,19 @@ server.use(cors())
 server.options('*', cors())
 
 server.post('/api/validate', async (req: any, res: any) => {
-  // try {
+  try {
     const object = await validateList(req.body.data)
     return res.json({
       success: true,
       object
     });
-  // } catch {
-  //   return res.json({
-  //     success: false,
-  //     object: {},
-  //     message: "Erro ao validar dados!"
-  //   });
-  // }
+  } catch {
+    return res.json({
+      success: false,
+      object: {},
+      message: "Erro ao validar dados!"
+    });
+  }
 })
 
 server.put('/api/update', async (req: any, res: any) => {
