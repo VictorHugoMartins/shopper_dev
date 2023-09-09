@@ -6,8 +6,6 @@ export function csvToJson(csv: string): {}[] | null {
   let lines = csv.split("\n");
   let headers = lines[0].split(",");
 
-  console.log("os headers: ", headers);
-
   if (!headers.includes('product_code') && !headers.includes('new_price\r') && headers.length !== 2) {
     return null
   }
