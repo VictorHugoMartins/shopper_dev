@@ -2,6 +2,7 @@ import connection from "../connect_database";
 import { ProductType } from "../types/ProductType";
 import { convertCSVBase64ToDict } from "./convertCSVBase64ToDict";
 import tableColumns from "./tableColumns";
+import verifyDifference from "./verifyDifference";
 
 async function validateList(data: any) {
   let isValid = true
@@ -17,11 +18,11 @@ async function validateList(data: any) {
     if (!item.product_code) {
       item.message = item.message + "Código inexistente!"
     } else {
-      if (!item.new_price || (Number.isNaN(item.new_price))) {
+      if (!item.new_price || (Number.isNaN(parseFloat(item.new_price.toString())))) {
         item.message = item.message + "Novo preço inválido!"
       }
 
-      const result = await new Promise<any>((resolve, reject) => {
+      const results = await new Promise<any>((resolve, reject) => {
         connection.query(
           "SELECT code, name, cost_price, sales_price from products where code = ? limit 1",
           item.product_code,
@@ -35,15 +36,19 @@ async function validateList(data: any) {
         );
       });
 
-      if (!result) {
+      if (!results) {
         item.message = item.message + "Código inexistente!";
       } else {
-        item = { ...item, name: result[0].name, sales_price: result[0].sales_price };
+        let result = { ...results[0], cost_price: parseFloat(results[0].cost_price), sales_price: parseFloat(results[0].sales_price) }
+        item = { ...item, name: result.name, sales_price: result.sales_price };
+        console.log(item, result)
 
         if (item.new_price < result.cost_price) {
           item.message = "Não atende a restrição do time financeiro!"
         }
-        if ((item.new_price > 10 * (result.sales_price / 100)) || (item.new_price < 10 * (result.sales_price / 100))) {
+
+        // Aceita mudanças de até 10% no valor atual
+        if (verifyDifference(result.sales_price, item.new_price)) {
           item.message = item.message + "Não atende a restrição do time de marketing!"
         }
       }
