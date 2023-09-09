@@ -21,12 +21,17 @@ async function updatePackPriceFromProduct(item: ProductType) {
     });
 
     if (typeof results !== "undefined" && typeof results[0] !== "undefined") {
-      const update = await new Promise<{}>((resolve, reject) => {
+      await new Promise<{}>((resolve, reject) => {
         connection.query(`UPDATE products SET sales_price = (
-           SELECT sales_price - (qty * (SELECT sales_price FROM products WHERE code = ? LIMIT 1)) + (qty * ?)
-           FROM subquery
-         ) WHERE code = ?`,
-          [Number(results[0].product_id), Number(item.new_price), Number(item.product_code)],
+          SELECT sales_price - (? * (SELECT sales_price FROM (SELECT * FROM products) AS p WHERE code = ? LIMIT 1)) + (? * ?)
+          FROM (SELECT * FROM products WHERE code = ? ) AS p
+        ) WHERE code = ?`,
+          [Number(results[0].qty),
+          Number(results[0].product_id),
+          Number(results[0].qty),
+          Number(item.new_price),
+          Number(item.product_code),
+          Number(item.product_code)],
           (err: Error, rows: {}) => {
             if (err) {
               reject(err);

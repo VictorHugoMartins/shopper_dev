@@ -1,4 +1,4 @@
-function verifyDifference(valorAntigo: number, novoValor: number) {
+function verifyDifference(valorAntigo: number, novoValor: number): boolean {
   const diferenca = Math.abs(novoValor - valorAntigo);
   const porcentagem = (diferenca / valorAntigo) * 100;
 
